@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Share Your Location</title>
+</head>
+<body>
+    <h2>Click the button to share your location</h2>
+    <button onclick="sendLocation()">Share Location</button>
+
+    <script>
+        function sendLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    let lat = position.coords.latitude;
+                    let lon = position.coords.longitude;
+                    let phone = "923440549124"; // Your WhatsApp number (without +)
+                    let message = `I am here: https://www.google.com/maps?q=${lat},${lon}`;
+                    
+                    window.location.href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+                }, function(error) {
+                    alert("Please enable location access!");
+                });
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+    </script>
+</body>
+</html>
